@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ReceipeAppJetpackCompose</string>
+    <string name="title_activity_compose_sample">ComposeSampleActivity</string>
+</resources>
