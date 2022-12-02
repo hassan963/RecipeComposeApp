@@ -26,9 +26,6 @@ class RecipeListFragment : Fragment() {
 
     val viewModel: RecipeListViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,11 +49,5 @@ class RecipeListFragment : Fragment() {
 
             }
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel.printData()
     }
 }
