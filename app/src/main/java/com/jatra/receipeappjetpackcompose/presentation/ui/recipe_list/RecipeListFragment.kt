@@ -29,7 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RecipeListFragment : Fragment() {
 
-    val viewModel: RecipeListViewModel by viewModels()
+    private val viewModel: RecipeListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +51,7 @@ class RecipeListFragment : Fragment() {
                         elevation = 8.dp
                     ) {
 
-                        Column() {
+                        Column {
 
                             Row(modifier = Modifier.fillMaxWidth()) {
                                 TextField(

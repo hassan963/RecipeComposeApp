@@ -22,6 +22,8 @@ constructor(private val recipeRepository: RecipeRepository, @Named("auth_token")
 
     val selectedCategory: MutableState<FoodCategory?> = mutableStateOf(null)
 
+    var categoryScrollPosition: Float = 0f
+
     init {
         fetchRecipes()
     }
@@ -47,4 +49,7 @@ constructor(private val recipeRepository: RecipeRepository, @Named("auth_token")
         onQueryChanged(category)
     }
 
+    fun onChangeScrollCategoryPosition(position: Float) {
+        categoryScrollPosition = position
+    }
 }
