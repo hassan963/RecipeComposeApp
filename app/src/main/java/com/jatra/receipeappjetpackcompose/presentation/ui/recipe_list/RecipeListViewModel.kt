@@ -18,20 +18,33 @@ constructor(private val recipeRepository: RecipeRepository, @Named("auth_token")
 
     val recipes: MutableState<List<Recipe>> = mutableStateOf(listOf())
 
+    val query = mutableStateOf("")
+
+    val selectedCategory: MutableState<FoodCategory?> = mutableStateOf(null)
 
     init {
         fetchRecipes()
     }
 
-    private fun fetchRecipes() {
+    fun fetchRecipes() {
         viewModelScope.launch {
             val result = recipeRepository.search(
                 token = token,
                 page = 1,
-                query = "chicken"
+                query = query.value
             )
             recipes.value = result
         }
+    }
+
+    fun onQueryChanged(query: String) {
+        this.query.value = query
+    }
+
+    fun onSelectedCategoryChanged(category: String) {
+        val newCategory = getFoodCategory(category)
+        selectedCategory.value = newCategory
+        onQueryChanged(category)
     }
 
 }
