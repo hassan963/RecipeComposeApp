@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.jatra.receipeappjetpackcompose.presentation.ui.components.CircularIndeterminateProgressBar
 import com.jatra.receipeappjetpackcompose.presentation.ui.components.RecipeCard
 import com.jatra.receipeappjetpackcompose.presentation.ui.components.SearchAppBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +34,8 @@ class RecipeListFragment : Fragment() {
 
                 val selectedCategory = viewModel.selectedCategory.value
 
+                val isLoading = viewModel.isLoading.value
+
                 Column {
                     SearchAppBar(
                         query = query,
@@ -41,12 +45,16 @@ class RecipeListFragment : Fragment() {
                         onSelectedCategoryChanged = viewModel::onSelectedCategoryChanged
                     )
 
-                    LazyColumn {
-                        itemsIndexed(
-                            items = recipes
-                        ) { index, recipe ->
-                            RecipeCard(recipe = recipe, onClick = {})
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        LazyColumn {
+                            itemsIndexed(
+                                items = recipes
+                            ) { _, recipe ->
+                                RecipeCard(recipe = recipe, onClick = {})
+                            }
                         }
+
+                        CircularIndeterminateProgressBar(isDisplayed = isLoading)
                     }
                 }
             }
